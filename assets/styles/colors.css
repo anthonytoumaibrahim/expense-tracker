@@ -1,3 +1,9 @@
 .text-primary {
   color: var(--primary-col);
 }
+.text-primary-light {
+  color: var(--primary-light-col);
+}
+.text-primary-lighter {
+  color: var(--primary-lighter-col);
+}

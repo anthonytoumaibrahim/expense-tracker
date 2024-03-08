@@ -2,4 +2,44 @@
   background-color: var(--light-col);
   box-shadow: var(--light-shadow);
   border-radius: var(--radius-md);
+  position: relative;
+  overflow: clip;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+}
+.welcome-card h1,
+h2 {
+  position: relative;
+  z-index: 1;
+}
+/* Decoration */
+.welcome-card::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 200%;
+  background-color: var(--primary-col);
+  top: 0;
+  left: 0;
+  rotate: -12deg;
+  transform-origin: left;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .welcome-card {
+    flex-direction: column;
+    text-align: center;
+    color: #000;
+    gap: 20px;
+  }
+  .welcome-card::after {
+    display: none;
+  }
+  .welcome-card .total-balance {
+    color: var(--primary-col);
+  }
 }

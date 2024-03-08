@@ -19,21 +19,40 @@
     <link rel="stylesheet" href="./assets/styles/pages/index.css" />
   </head>
   <body>
-    <header class="site-header margin-bottom">
+    <header class="site-header margin-bottom-sm">
       <nav class="container">
         <a href="./index.html" class="unstyled-link"
           ><img src="./assets/images/logo.svg" alt="Expense Tracker"
         /></a>
         <ul class="">
           <li><a href="./index.html">Home</a></li>
-          <li><strong>Balance: </strong><span class="total-balance">$0.00</span></li>
+          <li>
+            <strong>Balance: </strong><span class="total-balance">$0.00</span>
+          </li>
         </ul>
       </nav>
     </header>
-    
-    <section class="welcome-card container">
-      <h2>Welcome, user!</h2>
-      <h1>Your total balance is: <span class="total-balance text-primary">$0.00</span></h1>
-    </section>
+
+    <main class="container">
+      <section class="welcome-card margin-bottom">
+        <div>
+          <h2>Welcome, user!</h2>
+          <h1>
+            Your total balance is:
+            <span class="total-balance text-primary-lighter">$0.00</span>
+          </h1>
+        </div>
+        <div class="welcome-button">
+          <a href="./transaction.html" class="button">
+            <img src="./assets/images/icons/transaction.svg" alt="" />
+            Add your transaction
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2>My Transactions</h2>
+      </section>
+    </main>
   </body>
 </html>
