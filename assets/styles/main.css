@@ -70,18 +70,20 @@ a:not(.unstyled-link):hover::after {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px 40px;
+  padding: 16px 32px;
 }
 /* Buttons */
 .button {
   background-color: var(--primary-col);
   color: var(--light-col);
-  padding: 20px 40px;
+  padding: 16px 32px;
   border-radius: var(--radius-sm);
   font-size: 1.25rem;
   display: flex;
   gap: 10px;
-  text-transform: uppercase;
+  text-transform: capitalize;
+  border: none;
+  cursor: pointer;
 }
 .button:hover {
   background-color: var(--primary-light-col);
@@ -90,6 +92,56 @@ a:not(.unstyled-link):hover::after {
 .button img {
   width: 28px;
 }
+
+/* Forms */
+.form-input {
+  font-family: inherit;
+  font-size: 1.25rem;
+  padding: 16px 32px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--primary-col);
+  outline: none;
+}
+.form-input:hover,
+.form-input:focus {
+  background-color: var(--light-col);
+}
+select.form-input {
+  color: #ffffff;
+  background-color: var(--primary-col);
+  padding-right: 56px;
+  /* https://stackoverflow.com/a/20464860 */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+select.form-input:hover,
+select.form-input:focus {
+  background-color: var(--primary-light-col);
+}
+.form-select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.form-select-wrapper::after {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-image: url(../images/icons/chevron-down.svg);
+  background-size: cover;
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+.form-radio-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 /* Header */
 .site-header {
   background-color: var(--light-col);

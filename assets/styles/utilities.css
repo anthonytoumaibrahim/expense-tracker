@@ -4,3 +4,6 @@
 .margin-bottom {
   margin-bottom: var(--margin);
 }
+.font-bold {
+  font-weight: bold;
+}

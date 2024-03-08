@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transaction | Expense Tracker</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./assets/styles/main.css" />
+    <link rel="stylesheet" href="./assets/styles/colors.css" />
+    <link rel="stylesheet" href="./assets/styles/utilities.css" />
+    <link rel="stylesheet" href="./assets/styles/pages/transaction.css" />
+    <!-- Scripts -->
+    <script src="./assets/scripts/pages/transaction.js"></script>
+  </head>
+  <body>
+    <header class="site-header margin-bottom-sm">
+      <nav class="container">
+        <a href="./index.html" class="unstyled-link"
+          ><img src="./assets/images/logo.svg" alt="Expense Tracker"
+        /></a>
+        <ul class="">
+          <li><a href="./index.html">Home</a></li>
+          <li>
+            <strong>Balance: </strong><span class="total-balance">$0.00</span>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section>
+        <h1 class="margin-bottom-sm">Create New Transaction</h1>
+        <form action="" class="trans_form">
+          <div class="form-radio-wrapper">
+            <label>Transaction Type:</label>
+            
+            <div>
+              <input type="radio" name="trans_type" value="income" id="trans_type_income">
+              <label for="trans_type_income">Income</label>
+            </div>
+            
+            <div>
+              <input type="radio" name="trans_type" value="expense" id="trans_type_expense">
+              <label for="trans_type_expense">Expense</label>
+            </div>
+          </div>
+          
+          <div>
+            <div class="form-select-wrapper">
+              <select name="" id="currency_selector" class="form-input">
+                <option value="usd">United States Dollar</option>
+              </select>
+            </div>
+            
+            <input type="number" class="form-input" placeholder="Amount">
+          </div>
+          
+          <p>Total balance after transaction: <span class="font-bold new-balance">$0.00</span></p>
+          
+          <button type="submit" class="button">Add</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
