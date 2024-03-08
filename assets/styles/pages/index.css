@@ -1,0 +1,5 @@
+.welcome-card {
+  background-color: var(--light-col);
+  box-shadow: var(--light-shadow);
+  border-radius: var(--radius-md);
+}
