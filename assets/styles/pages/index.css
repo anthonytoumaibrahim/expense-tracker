@@ -32,6 +32,7 @@ h2 {
   width: 100%;
   text-align: left;
   border-spacing: 0;
+  overflow-x: scroll;
 }
 .transactions-table thead {
   background-color: var(--primary-col);
@@ -51,6 +52,23 @@ td {
 }
 .transactions-table .currency-row img {
   width: 28px;
+}
+.action-button {
+  border: none;
+  background-color: transparent;
+  gap: 3px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+.action-button:hover {
+  opacity: 0.65;
+}
+.action-button img {
+  width: 22px;
+}
+.no-transactions {
+  margin-top: var(--margin-sm);
+  text-align: center;
 }
 
 /* Responsiveness */

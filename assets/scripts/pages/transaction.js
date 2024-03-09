@@ -47,7 +47,7 @@ transForm.addEventListener("submit", (e) => {
     currencySelector.value,
     transAmount.value,
     document.querySelector('input[name="trans_type"]:checked').value,
-    transDesc.value
+    transDesc.value.trim()
   );
 });
 
