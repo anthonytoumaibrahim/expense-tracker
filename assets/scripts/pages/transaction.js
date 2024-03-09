@@ -7,11 +7,21 @@ const [currencySelector, transAmount, transDesc] = [
   document.getElementById("trans_desc"),
 ];
 let prevCurrency = "USD";
+let editMode = false;
+let editTransaction = {};
 
 // Check if edit mode
-const param = new URLSearchParams(window.location.search).get("edit");
-if (param) {
-  title.textContent = "Edit Transaction";
+const editParam = new URLSearchParams(window.location.search).get("edit");
+if (editParam) {
+  // Check if transaction ID is valid
+  const transactions = JSON.parse(localStorage.transactions ?? "[]");
+  const transaction = transactions.filter((trans) => trans.id == editParam);
+  if (transaction.length > 0) {
+    title.textContent = "Edit Transaction";
+    editMode = true;
+    editTransaction = transaction[0];
+    prevCurrency = transaction[0].currency.code;
+  }
 }
 
 // Fetch currencies and populate
@@ -20,7 +30,9 @@ getCurrencies().then(() => {
   const currencies = JSON.parse(localStorage.currencies);
   currencies.map((currency) => {
     const { name, symbol, code } = currency;
-    currencySelector.innerHTML += `<option value="${code}">${name} (${symbol})</option>`;
+    currencySelector.innerHTML += `<option value="${code}" ${
+      prevCurrency === code ? "selected" : ""
+    }>${name} (${symbol})</option>`;
   });
 });
 

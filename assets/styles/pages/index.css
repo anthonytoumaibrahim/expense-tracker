@@ -70,7 +70,23 @@ td {
   margin-top: var(--margin-sm);
   text-align: center;
 }
-
+select.form-input-sm {
+  background-color: var(--primary-light-col);
+  padding: 8px 54px 8px 8px;
+  font-size: 1rem;
+}
+th[data-sort] {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.filter-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 /* Responsiveness */
 @media (max-width: 1024px) {
   .welcome-card {

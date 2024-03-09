@@ -55,14 +55,26 @@
       </section>
 
       <section>
-        <h2 class="margin-bottom-xs">My Transactions</h2>
+        <div class="filter-options margin-bottom-sm">
+          <h2>My Transactions</h2>
+          <div>
+            <label for="show_type">Show:</label>
+            <div class="form-select-wrapper">
+              <select id="show_type" class="form-input form-input-sm">
+                <option value="all" selected>All</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+          </div>
+        </div>
         <table class="transactions-table">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Date</th>
+              <th data-sort="date">Date</th>
               <th>Description</th>
-              <th>Amount</th>
+              <th data-sort="amount">Amount</th>
               <th>Actions</th>
             </tr>
           </thead>
