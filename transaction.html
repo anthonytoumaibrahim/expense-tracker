@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="./assets/styles/utilities.css" />
     <link rel="stylesheet" href="./assets/styles/pages/transaction.css" />
     <!-- Scripts -->
-    <script src="./assets/scripts/pages/transaction.js"></script>
+    <script src="./assets/scripts/main.js" defer></script>
+    <script src="./assets/scripts/pages/transaction.js" defer></script>
   </head>
   <body>
     <header class="site-header margin-bottom-sm">
@@ -37,34 +38,49 @@
 
     <main class="container">
       <section>
-        <h1 class="margin-bottom-sm">Create New Transaction</h1>
-        <form action="" class="trans_form">
+        <h1 class="margin-bottom-sm" id="transaction-title">
+          Create New Transaction
+        </h1>
+        <form action="" class="trans_form" id="trans_form">
           <div class="form-radio-wrapper">
             <label>Transaction Type:</label>
-            
+
             <div>
-              <input type="radio" name="trans_type" value="income" id="trans_type_income">
+              <input
+                type="radio"
+                name="trans_type"
+                value="income"
+                id="trans_type_income"
+                checked
+              />
               <label for="trans_type_income">Income</label>
             </div>
-            
+
             <div>
-              <input type="radio" name="trans_type" value="expense" id="trans_type_expense">
+              <input
+                type="radio"
+                name="trans_type"
+                value="expense"
+                id="trans_type_expense"
+              />
               <label for="trans_type_expense">Expense</label>
             </div>
           </div>
-          
+
           <div>
             <div class="form-select-wrapper">
-              <select name="" id="currency_selector" class="form-input">
-                <option value="usd">United States Dollar</option>
-              </select>
+              <select id="currency_selector" class="form-input"></select>
             </div>
-            
-            <input type="number" class="form-input" placeholder="Amount">
+
+            <input
+              type="number"
+              step="0.01"
+              id="trans_amount"
+              class="form-input"
+              placeholder="Amount"
+            />
           </div>
-          
-          <p>Total balance after transaction: <span class="font-bold new-balance">$0.00</span></p>
-          
+
           <button type="submit" class="button">Add</button>
         </form>
       </section>
