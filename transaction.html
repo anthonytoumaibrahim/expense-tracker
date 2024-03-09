@@ -67,7 +67,7 @@
             </div>
           </div>
 
-          <div>
+          <div class="trans_details">
             <div class="form-select-wrapper">
               <select id="currency_selector" class="form-input"></select>
             </div>
@@ -79,6 +79,15 @@
               class="form-input"
               placeholder="Amount"
             />
+
+            <div class="form-input-wrapper">
+              <label for="trans_desc">Description:</label>
+              <textarea
+                id="trans_desc"
+                class="form-input"
+                placeholder="Optionally write a small description for this transaction, e.g: 'Paid electricity bill', 'Cashed out salary', etc."
+              ></textarea>
+            </div>
           </div>
 
           <button type="submit" class="button">Add</button>

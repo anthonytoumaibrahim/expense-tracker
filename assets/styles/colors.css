@@ -7,3 +7,9 @@
 .text-primary-lighter {
   color: var(--primary-lighter-col);
 }
+.text-muted {
+  color: var(--muted-col);
+}
+.text-error {
+  color: var(--error-col);
+}

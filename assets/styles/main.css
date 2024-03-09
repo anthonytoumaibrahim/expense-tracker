@@ -4,6 +4,8 @@
   --primary-lighter-col: #d2e6de;
   --secondary-col: #101214;
   --light-col: #e9f3ef;
+  --muted-col: #a6a6a6;
+  --error-col: #dc2626;
 
   --light-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.14);
   --light-shadow: 0 4px 8px rgba(0, 0, 0, 0.14);
@@ -140,6 +142,9 @@ select.form-input:focus {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+.form-input-wrapper {
+  width: 100%;
 }
 
 /* Header */

@@ -1,9 +1,10 @@
 const title = document.getElementById("transaction-title");
 // Form
 const transForm = document.getElementById("trans_form");
-const [currencySelector, transAmount] = [
+const [currencySelector, transAmount, transDesc] = [
   document.getElementById("currency_selector"),
   document.getElementById("trans_amount"),
+  document.getElementById("trans_desc"),
 ];
 let prevCurrency = "USD";
 
@@ -45,24 +46,28 @@ transForm.addEventListener("submit", (e) => {
   createTransaction(
     currencySelector.value,
     transAmount.value,
-    document.querySelector('input[name="trans_type"]:checked').value
+    document.querySelector('input[name="trans_type"]:checked').value,
+    transDesc.value
   );
 });
 
 const createTransaction = async (
   currency = "USD",
   amount = 0.0,
-  type = "income"
+  type = "income",
+  desc = ""
 ) => {
   const transactions = JSON.parse(localStorage.transactions ?? "[]");
   const transObject = {
     id: (transactions[transactions.length - 1]?.id ?? 0) + 1,
-    currency: currency,
+    currency: getCurrencyDetails(currency),
     amount: amount,
     usdAmount: await convertCurrency(currency, "USD", amount).then(
       (data) => data
     ),
     type: type,
+    desc: desc,
+    date: Date.now(),
   };
   localStorage.transactions = JSON.stringify([...transactions, transObject]);
   calculateBalance();

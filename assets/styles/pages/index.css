@@ -28,6 +28,31 @@ h2 {
   transform-origin: left;
 }
 
+.transactions-table {
+  width: 100%;
+  text-align: left;
+  border-spacing: 0;
+}
+.transactions-table thead {
+  background-color: var(--primary-col);
+  color: var(--light-col);
+}
+.transactions-table th,
+td {
+  padding: 10px;
+}
+.transactions-table tr:nth-child(even) {
+  background-color: var(--light-col);
+}
+.transactions-table .currency-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.transactions-table .currency-row img {
+  width: 28px;
+}
+
 /* Responsiveness */
 @media (max-width: 1024px) {
   .welcome-card {

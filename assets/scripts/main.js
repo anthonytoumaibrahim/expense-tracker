@@ -37,10 +37,12 @@ const convertCurrency = async (from = "USD", to = "USD", amount = 0.0) => {
 };
 
 // https://www.freecodecamp.org/news/how-to-format-number-as-currency-in-javascript-one-line-of-code/
-const USDollar = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
+const CurrencyFormat = (currency = "USD") => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency,
+  });
+};
 
 const calculateBalance = () => {
   const transactions = JSON.parse(localStorage.transactions ?? "[]");
@@ -57,10 +59,15 @@ const calculateBalance = () => {
         break;
     }
   });
-  const formatted = USDollar.format(balance);
+  const formatted = CurrencyFormat("USD").format(balance);
   totalBalance.forEach((el) => (el.textContent = `${formatted}`));
   return formatted;
 };
 
 // Calculate balance on load
 calculateBalance();
+
+const getCurrencyDetails = (code) => {
+  const currencies = JSON.parse(localStorage.currencies);
+  return currencies.filter((currency) => currency.code === code)?.[0];
+};

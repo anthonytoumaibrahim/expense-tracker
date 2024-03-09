@@ -4,3 +4,16 @@
   gap: 16px;
   align-items: start;
 }
+.trans_details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: 16px;
+}
+.trans_details textarea {
+  width: 100%;
+}
+input[type="radio"]:checked + label {
+  color: var(--primary-col);
+  font-weight: bold;
+}
