@@ -28,6 +28,7 @@ h2 {
   transform-origin: left;
 }
 
+/* Table */
 .transactions-table {
   width: 100%;
   text-align: left;
@@ -70,11 +71,6 @@ td {
   margin-top: var(--margin-sm);
   text-align: center;
 }
-select.form-input-sm {
-  background-color: var(--primary-light-col);
-  padding: 8px 54px 8px 8px;
-  font-size: 1rem;
-}
 th[data-sort] {
   display: flex;
   align-items: center;
@@ -82,10 +78,20 @@ th[data-sort] {
   cursor: pointer;
   text-decoration: underline;
 }
+select.form-input-sm {
+  background-color: var(--primary-light-col);
+  padding: 8px 54px 8px 8px;
+  font-size: 1rem;
+}
 .filter-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.filter-options > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 /* Responsiveness */
 @media (max-width: 1024px) {

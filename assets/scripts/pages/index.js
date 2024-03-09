@@ -2,27 +2,41 @@ const transTable = document.querySelector(".transactions-table tbody");
 const transactions = JSON.parse(localStorage.transactions ?? "[]");
 const noTrans = document.querySelector(".no-transactions");
 const showType = document.getElementById("show_type");
-const sortLinks = document.querySelectorAll("th[data-sort]");
+const sortHeaders = document.querySelectorAll("th[data-sort]");
+const currencySelector = document.getElementById("currency_select");
 
 let sortDesc = false;
 let show = "all";
 let sort = "date";
+let currency = "all";
 
-sortLinks.forEach((link) =>
-  link.addEventListener("click", () => {
-    const sortType = link.dataset.sort;
+sortHeaders.forEach((header) =>
+  header.addEventListener("click", () => {
+    const sortType = header.dataset.sort;
     sortDesc = !sortDesc;
-    populateTable(show, sortType, sortDesc);
+    populateTable(show, currency, sortType, sortDesc);
   })
 );
 
+getCurrencies().then(() => {
+  const currencies = JSON.parse(localStorage.currencies);
+  currencies.map((currency) => {
+    const { name, symbol, code } = currency;
+    currencySelector.innerHTML += `<option value="${code}">${code} (${symbol})</option>`;
+  });
+});
 showType.addEventListener("change", (e) => {
   const type = e.target.value;
   show = type;
   populateTable(type);
 });
+currencySelector.addEventListener("change", (e) => {
+  const selCurrency = e.target.value;
+  currency = selCurrency;
+  populateTable(show, selCurrency);
+});
 
-const populateTable = (type, sort = "date", desc = false) => {
+const populateTable = (type, currency = "all", sort = "date", desc = false) => {
   transTable.innerHTML = "";
   const transactions = JSON.parse(localStorage.transactions ?? "[]");
   let shownTransactions;
@@ -35,6 +49,11 @@ const populateTable = (type, sort = "date", desc = false) => {
       break;
     default:
       shownTransactions = transactions;
+  }
+  if (currency !== "all") {
+    shownTransactions = shownTransactions.filter(
+      (tr) => tr.currency.code === currency
+    );
   }
   switch (sort) {
     case "date":

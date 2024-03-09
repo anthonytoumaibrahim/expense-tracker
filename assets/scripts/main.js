@@ -33,7 +33,7 @@ const convertCurrency = async (from = "USD", to = "USD", amount = 0.0) => {
     }),
   });
   const data = await result.json();
-  return data;
+  return parseFloat(data.toFixed(2));
 };
 
 // https://www.freecodecamp.org/news/how-to-format-number-as-currency-in-javascript-one-line-of-code/
