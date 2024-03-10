@@ -1,6 +1,6 @@
 const API_URLS = {
-  fetch: "https://ivory-ostrich-yoke.cyclic.app/students/available",
-  convert: "https://ivory-ostrich-yoke.cyclic.app/students/convert",
+  fetch: "https://crowded-cyan-wildebeest.cyclic.app/students/available",
+  convert: "https://crowded-cyan-wildebeest.cyclic.app/students/convert",
 };
 
 const totalBalance = document.querySelectorAll(".total-balance");
