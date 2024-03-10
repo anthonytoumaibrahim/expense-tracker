@@ -41,6 +41,13 @@ h2 {
   background-color: var(--primary-col);
   color: var(--light-col);
 }
+.transactions-table tfoot th:nth-child(1) {
+  text-align: end;
+}
+.transactions-table tfoot th {
+  border-top: 2px solid var(--primary-col);
+  background-color: var(--primary-lighter-col);
+}
 .transactions-table th,
 td {
   padding: 10px;
