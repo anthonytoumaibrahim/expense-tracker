@@ -3,9 +3,10 @@ const noTrans = document.querySelector(".no-transactions");
 const showTypeSelector = document.getElementById("show_type");
 const sortingHeaders = document.querySelectorAll("th[data-sort]");
 const currencySelector = document.getElementById("currency_select");
-const [amountFromInput, amountToInput] = [
+const [amountFromInput, amountToInput, clearAmount] = [
   document.getElementById("amount_from"),
   document.getElementById("amount_to"),
+  document.getElementById("clear_amount"),
 ];
 
 // Sorting & filtering variables
@@ -41,6 +42,12 @@ amountFromInput.addEventListener("input", (e) => {
 });
 amountToInput.addEventListener("input", (e) => {
   amountTo = parseFloat(e.target.value);
+  populateTable();
+});
+clearAmount.addEventListener("click", (e) => {
+  amountFrom = NaN;
+  amountTo = NaN;
+  [amountFromInput, amountToInput].forEach((e) => (e.value = ""));
   populateTable();
 });
 

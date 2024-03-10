@@ -104,11 +104,20 @@ select.form-input-sm {
 .filter-options {
   display: flex;
   gap: 10px;
+  align-items: flex-end;
 }
 .filter-amount {
   display: flex;
   gap: 10px;
   align-items: center;
+  position: relative;
+}
+.filter-amount a {
+  font-size: 0.85rem;
+  position: absolute;
+  top: 100%;
+  right: 5px;
+  cursor: pointer;
 }
 /* Responsiveness */
 @media (max-width: 1024px) {
@@ -131,11 +140,11 @@ select.form-input-sm {
   .table-wrapper {
     overflow-x: scroll;
   }
-  
 }
 @media (max-width: 768px) {
   .filter-options {
-    flex-direction: column;
-    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
   }
 }
