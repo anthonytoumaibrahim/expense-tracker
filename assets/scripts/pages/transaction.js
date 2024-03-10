@@ -47,36 +47,6 @@ getCurrencies().then(() => {
   });
 });
 
-currencySelector.addEventListener("change", async (e) => {
-  // Prevent unnecessary API call
-  if (transAmount.value == "") {
-    return;
-  }
-
-  try {
-    // Disable amount field
-    toggleDisabled(transAmount, true);
-
-    const newCurrency = e.target.value;
-    // Convert currencies
-    const convert = await convertCurrency(
-      prevCurrency,
-      newCurrency,
-      parseFloat(transAmount.value)
-    );
-    const data = await convert;
-    transAmount.value = data;
-    toggleDisabled(transAmount, false);
-    prevCurrency = newCurrency;
-  } catch (error) {
-    alert(
-      "An error occurred which prevented the amount from being converted. Error details are in the console."
-    );
-    console.log(error);
-    toggleDisabled(transAmount, false);
-  }
-});
-
 transForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -90,8 +60,8 @@ transForm.addEventListener("submit", (e) => {
     transDesc.value.trim()
   ).then(() => {
     toggleDisabled(submitBtn, false);
-    transForm.reset();
     successMsg.classList.remove("hidden");
+    if (!editMode) transForm.reset();
   });
 });
 
