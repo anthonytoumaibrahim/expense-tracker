@@ -53,20 +53,28 @@ currencySelector.addEventListener("change", async (e) => {
     return;
   }
 
-  // Disable amount field
-  toggleDisabled(transAmount, true);
+  try {
+    // Disable amount field
+    toggleDisabled(transAmount, true);
 
-  const newCurrency = e.target.value;
-  // Convert currencies
-  const convert = await convertCurrency(
-    prevCurrency,
-    newCurrency,
-    parseFloat(transAmount.value)
-  );
-  const data = await convert;
-  transAmount.value = data;
-  toggleDisabled(transAmount, false);
-  prevCurrency = newCurrency;
+    const newCurrency = e.target.value;
+    // Convert currencies
+    const convert = await convertCurrency(
+      prevCurrency,
+      newCurrency,
+      parseFloat(transAmount.value)
+    );
+    const data = await convert;
+    transAmount.value = data;
+    toggleDisabled(transAmount, false);
+    prevCurrency = newCurrency;
+  } catch (error) {
+    alert(
+      "An error occurred which prevented the amount from being converted. Error details are in the console."
+    );
+    console.log(error);
+    toggleDisabled(transAmount, false);
+  }
 });
 
 transForm.addEventListener("submit", (e) => {
