@@ -114,6 +114,10 @@ a:not(.unstyled-link):hover::after {
 .form-input:focus {
   background-color: var(--light-col);
 }
+.form-input-sm {
+  padding: 8px;
+  font-size: 1rem;
+}
 select.form-input {
   color: #ffffff;
   background-color: var(--primary-col);

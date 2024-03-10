@@ -95,18 +95,20 @@ th[data-sort]:hover {
 }
 select.form-input-sm {
   background-color: var(--primary-light-col);
-  padding: 8px 54px 8px 8px;
-  font-size: 1rem;
 }
-.filter-options {
+.filter-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.filter-options > div {
+.filter-options {
   display: flex;
-  align-items: center;
   gap: 10px;
+}
+.filter-amount {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 /* Responsiveness */
 @media (max-width: 1024px) {
@@ -122,16 +124,18 @@ select.form-input-sm {
   .welcome-card .total-balance {
     color: var(--primary-col);
   }
-  .filter-options {
+  .filter-wrapper {
     flex-direction: column;
+    gap: 20px;
   }
   .table-wrapper {
     overflow-x: scroll;
   }
+  
 }
 @media (max-width: 768px) {
-  .filter-options > div {
+  .filter-options {
     flex-direction: column;
-    gap: 5px;
+    width: 100%;
   }
 }

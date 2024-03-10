@@ -3,12 +3,18 @@ const noTrans = document.querySelector(".no-transactions");
 const showTypeSelector = document.getElementById("show_type");
 const sortingHeaders = document.querySelectorAll("th[data-sort]");
 const currencySelector = document.getElementById("currency_select");
+const [amountFromInput, amountToInput] = [
+  document.getElementById("amount_from"),
+  document.getElementById("amount_to"),
+];
 
 // Sorting & filtering variables
 let sortDescending = false;
 let showType = "all";
 let sort = "date";
 let currency = "all";
+let amountFrom;
+let amountTo;
 
 // Event listeners
 sortingHeaders.forEach((header) =>
@@ -28,6 +34,14 @@ currencySelector.addEventListener("change", (e) => {
   const selCurrency = e.target.value;
   currency = selCurrency;
   populateTable(showType, selCurrency);
+});
+amountFromInput.addEventListener("input", (e) => {
+  amountFrom = parseFloat(e.target.value);
+  populateTable();
+});
+amountToInput.addEventListener("input", (e) => {
+  amountTo = parseFloat(e.target.value);
+  populateTable();
 });
 
 getCurrencies().then(() => {
@@ -114,6 +128,14 @@ const filterTransactions = () => {
             (b.type === "income" ? b.usdAmount : -b.usdAmount)
       );
       break;
+  }
+
+  // Amount from and to
+  if (!isNaN(amountFrom) && !isNaN(amountTo)) {
+    transactions = transactions.filter((tr) => {
+      const amount = tr.type === "income" ? tr.amount : -tr.amount;
+      return amount >= amountFrom && amount <= amountTo;
+    });
   }
 
   return transactions;
