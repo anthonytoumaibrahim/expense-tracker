@@ -83,6 +83,7 @@ a:not(.unstyled-link):hover::after {
   border-radius: var(--radius-sm);
   font-size: 1.25rem;
   display: flex;
+  align-items: center;
   gap: 10px;
   text-transform: capitalize;
   border: none;
@@ -165,4 +166,26 @@ select.form-input:focus {
   list-style-type: none;
   display: flex;
   gap: 20px;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .site-header img {
+    max-width: 240px;
+  }
+  .site-header nav ul {
+    font-size: 0.85rem;
+    gap: 12px;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 12px 8px;
+  }
+  .button {
+    font-size: 1rem;
+  }
+  .site-header img {
+    max-width: 200px;
+  }
 }

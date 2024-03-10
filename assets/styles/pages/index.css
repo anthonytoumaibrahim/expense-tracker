@@ -19,7 +19,7 @@ h2 {
 .welcome-card::after {
   content: "";
   position: absolute;
-  width: 50%;
+  width: 60%;
   height: 200%;
   background-color: var(--primary-col);
   top: 0;
@@ -29,11 +29,13 @@ h2 {
 }
 
 /* Table */
+.table-wrapper {
+  position: relative;
+}
 .transactions-table {
   width: 100%;
   text-align: left;
   border-spacing: 0;
-  overflow-x: scroll;
 }
 .transactions-table thead {
   background-color: var(--primary-col);
@@ -71,12 +73,18 @@ td {
   margin-top: var(--margin-sm);
   text-align: center;
 }
+.sorting-icon {
+  width: 20px;
+}
 th[data-sort] {
   display: flex;
   align-items: center;
   gap: 4px;
   cursor: pointer;
   text-decoration: underline;
+}
+th[data-sort]:hover {
+  opacity: 0.85;
 }
 select.form-input-sm {
   background-color: var(--primary-light-col);
@@ -106,5 +114,17 @@ select.form-input-sm {
   }
   .welcome-card .total-balance {
     color: var(--primary-col);
+  }
+  .filter-options {
+    flex-direction: column;
+  }
+  .table-wrapper {
+    overflow-x: scroll;
+  }
+}
+@media (max-width: 768px) {
+  .filter-options > div {
+    flex-direction: column;
+    gap: 5px;
   }
 }
