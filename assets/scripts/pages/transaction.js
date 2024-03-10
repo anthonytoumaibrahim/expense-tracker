@@ -1,10 +1,11 @@
 const title = document.getElementById("transaction-title");
 // Form
 const transForm = document.getElementById("trans_form");
-const [currencySelector, transAmount, transDesc] = [
+const [currencySelector, transAmount, transDesc, submitBtn] = [
   document.getElementById("currency_selector"),
   document.getElementById("trans_amount"),
   document.getElementById("trans_desc"),
+  document.getElementById("submit_btn"),
 ];
 let prevCurrency = "USD";
 let editMode = false;
@@ -21,6 +22,15 @@ if (editParam) {
     editMode = true;
     editTransaction = transaction[0];
     prevCurrency = transaction[0].currency.code;
+
+    // Fill form
+    transAmount.value = editTransaction.amount;
+    transDesc.value = editTransaction.desc;
+    document.querySelector(
+      `#trans_type_${editTransaction.type}`
+    ).checked = true;
+
+    submitBtn.textContent = "Save";
   }
 }
 
@@ -55,12 +65,16 @@ currencySelector.addEventListener("change", async (e) => {
 
 transForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  toggleDisabled(submitBtn, true);
   createTransaction(
     currencySelector.value,
     transAmount.value,
     document.querySelector('input[name="trans_type"]:checked').value,
     transDesc.value.trim()
-  );
+  ).then(() => {
+    toggleDisabled(submitBtn, false);
+    transForm.reset();
+  });
 });
 
 const createTransaction = async (
@@ -71,7 +85,9 @@ const createTransaction = async (
 ) => {
   const transactions = JSON.parse(localStorage.transactions ?? "[]");
   const transObject = {
-    id: (transactions[transactions.length - 1]?.id ?? 0) + 1,
+    id: editMode
+      ? editTransaction.id
+      : (transactions[transactions.length - 1]?.id ?? 0) + 1,
     currency: getCurrencyDetails(currency),
     amount: amount,
     usdAmount: await convertCurrency(currency, "USD", amount).then(
@@ -79,8 +95,21 @@ const createTransaction = async (
     ),
     type: type,
     desc: desc,
-    date: Date.now(),
+    date: editMode ? editTransaction.date : Date.now(),
   };
+  if (editMode) {
+    const newTransactions = transactions.map((tr) =>
+      tr.id === transObject.id
+        ? {
+            ...tr,
+            ...transObject,
+          }
+        : tr
+    );
+    localStorage.transactions = JSON.stringify([...newTransactions]);
+    calculateBalance();
+    return;
+  }
   localStorage.transactions = JSON.stringify([...transactions, transObject]);
   calculateBalance();
 };
