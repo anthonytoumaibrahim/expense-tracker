@@ -1,22 +1,33 @@
 const transTable = document.querySelector(".transactions-table tbody");
-const transactions = JSON.parse(localStorage.transactions ?? "[]");
 const noTrans = document.querySelector(".no-transactions");
-const showType = document.getElementById("show_type");
-const sortHeaders = document.querySelectorAll("th[data-sort]");
+const showTypeSelector = document.getElementById("show_type");
+const sortingHeaders = document.querySelectorAll("th[data-sort]");
 const currencySelector = document.getElementById("currency_select");
 
-let sortDesc = false;
-let show = "all";
+// Sorting & filtering variables
+let sortDescending = false;
+let showType = "all";
 let sort = "date";
 let currency = "all";
 
-sortHeaders.forEach((header) =>
+// Event listeners
+sortingHeaders.forEach((header) =>
   header.addEventListener("click", () => {
     const sortType = header.dataset.sort;
-    sortDesc = !sortDesc;
-    populateTable(show, currency, sortType, sortDesc);
+    sortDescending = !sortDescending;
+    populateTable();
   })
 );
+showTypeSelector.addEventListener("change", (e) => {
+  const type = e.target.value;
+  showType = type;
+  populateTable(type);
+});
+currencySelector.addEventListener("change", (e) => {
+  const selCurrency = e.target.value;
+  currency = selCurrency;
+  populateTable(showType, selCurrency);
+});
 
 getCurrencies().then(() => {
   const currencies = JSON.parse(localStorage.currencies);
@@ -25,48 +36,17 @@ getCurrencies().then(() => {
     currencySelector.innerHTML += `<option value="${code}">${code} (${symbol})</option>`;
   });
 });
-showType.addEventListener("change", (e) => {
-  const type = e.target.value;
-  show = type;
-  populateTable(type);
-});
-currencySelector.addEventListener("change", (e) => {
-  const selCurrency = e.target.value;
-  currency = selCurrency;
-  populateTable(show, selCurrency);
-});
 
-const populateTable = (type, currency = "all", sort = "date", desc = false) => {
+const populateTable = () => {
   transTable.innerHTML = "";
-  const transactions = JSON.parse(localStorage.transactions ?? "[]");
-  let shownTransactions;
-  switch (type) {
-    case "income":
-      shownTransactions = transactions.filter((tr) => tr.type === "income");
-      break;
-    case "expense":
-      shownTransactions = transactions.filter((tr) => tr.type === "expense");
-      break;
-    default:
-      shownTransactions = transactions;
-  }
-  if (currency !== "all") {
-    shownTransactions = shownTransactions.filter(
-      (tr) => tr.currency.code === currency
-    );
-  }
-  switch (sort) {
-    case "date":
-      shownTransactions = shownTransactions.sort((a, b) =>
-        desc ? b.date - a.date : a.date - b.date
-      );
-      break;
-    case "amount":
-      shownTransactions = shownTransactions.sort((a, b) =>
-        desc ? b.usdAmount - a.usdAmount : a.usdAmount - b.usdAmount
-      );
-  }
-  shownTransactions.map((trans) => {
+
+  const transactions = filterTransactions();
+
+  // Toggle no transactions message if none are found
+  noTrans.classList.toggle("hidden", transactions.length > 0);
+
+  // Iterate over transactions and add them to table
+  transactions.map((trans) => {
     const { id, currency, amount, usdAmount, type, desc, date } = trans;
     // Delete Button
     const deleteBtn = document.createElement("button");
@@ -92,16 +72,49 @@ const populateTable = (type, currency = "all", sort = "date", desc = false) => {
 
     // Edit button
     actionsCol.innerHTML += `<a class="action-button unstyled-link" href="./transaction.html?edit=${id}"><img src="./assets/images/icons/edit.svg" /></a>`;
+
     actionsCol.append(deleteBtn);
-
     row.append(actionsCol);
-
     transTable.append(row);
   });
 };
 
+const filterTransactions = () => {
+  let transactions = JSON.parse(localStorage.transactions ?? "[]");
+
+  // Transaction type
+  switch (showType) {
+    case "income":
+      transactions = transactions.filter((tr) => tr.type === "income");
+      break;
+    case "expense":
+      transactions = transactions.filter((tr) => tr.type === "expense");
+      break;
+  }
+
+  // Transaction currency
+  if (currency != "all") {
+    transactions = transactions.filter((tr) => tr.currency.code === currency);
+  }
+
+  // Sorting
+  switch (sort) {
+    case "date":
+      transactions = transactions.sort((a, b) =>
+        sortDescending ? b.date - a.date : a.date - b.date
+      );
+      break;
+    case "amount":
+      transactions = transactions.sort((a, b) =>
+        sortDescending ? b.usdAmount - a.usdAmount : a.usdAmount - b.usdAmount
+      );
+  }
+
+  return transactions;
+};
+
+// Populate table on page load
 populateTable();
-if (transactions.length > 0) noTrans.classList.toggle("hidden", true);
 
 const deleteTransaction = (id) => {
   document.getElementById(`transaction_${id}`).remove();
@@ -110,5 +123,5 @@ const deleteTransaction = (id) => {
   localStorage.transactions = JSON.stringify(newTransactions);
   // Calculate new balance
   calculateBalance();
-  if (newTransactions.length === 0) noTrans.classList.toggle("hidden", false);
+  noTrans.classList.toggle("hidden", newTransactions.length !== 0);
 };
