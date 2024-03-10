@@ -1,6 +1,7 @@
 const title = document.getElementById("transaction-title");
 // Form
 const transForm = document.getElementById("trans_form");
+const successMsg = document.getElementById("success_msg");
 const [currencySelector, transAmount, transDesc, submitBtn] = [
   document.getElementById("currency_selector"),
   document.getElementById("trans_amount"),
@@ -65,7 +66,10 @@ currencySelector.addEventListener("change", async (e) => {
 
 transForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
+  successMsg.classList.add("hidden");
   toggleDisabled(submitBtn, true);
+
   createTransaction(
     currencySelector.value,
     transAmount.value,
@@ -74,6 +78,7 @@ transForm.addEventListener("submit", (e) => {
   ).then(() => {
     toggleDisabled(submitBtn, false);
     transForm.reset();
+    successMsg.classList.remove("hidden");
   });
 });
 

@@ -44,7 +44,7 @@ const CurrencyFormat = (currency = "USD") => {
   });
 };
 
-const calculateBalance = () => {
+const calculateBalance = (valueOnly = false) => {
   const transactions = JSON.parse(localStorage.transactions ?? "[]");
   let balance = 0;
   transactions.map((trans) => {
@@ -59,6 +59,9 @@ const calculateBalance = () => {
         break;
     }
   });
+  if (valueOnly) {
+    return parseFloat(balance.toFixed(2));
+  }
   const formatted = CurrencyFormat("USD").format(balance);
   totalBalance.forEach((el) => (el.textContent = `${formatted}`));
   return formatted;
