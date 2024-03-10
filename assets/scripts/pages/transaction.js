@@ -72,7 +72,7 @@ transForm.addEventListener("submit", (e) => {
 
   createTransaction(
     currencySelector.value,
-    transAmount.value,
+    Math.abs(transAmount.value),
     document.querySelector('input[name="trans_type"]:checked').value,
     transDesc.value.trim()
   ).then(() => {

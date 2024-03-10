@@ -14,6 +14,7 @@ let currency = "all";
 sortingHeaders.forEach((header) =>
   header.addEventListener("click", () => {
     const sortType = header.dataset.sort;
+    sort = sortType;
     sortDescending = !sortDescending;
     populateTable();
   })
@@ -106,8 +107,13 @@ const filterTransactions = () => {
       break;
     case "amount":
       transactions = transactions.sort((a, b) =>
-        sortDescending ? b.usdAmount - a.usdAmount : a.usdAmount - b.usdAmount
+        sortDescending
+          ? (b.type === "income" ? b.usdAmount : -b.usdAmount) -
+            (a.type === "income" ? a.usdAmount : -a.usdAmount)
+          : (a.type === "income" ? a.usdAmount : -a.usdAmount) -
+            (b.type === "income" ? b.usdAmount : -b.usdAmount)
       );
+      break;
   }
 
   return transactions;
