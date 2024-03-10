@@ -48,6 +48,11 @@ getCurrencies().then(() => {
 });
 
 currencySelector.addEventListener("change", async (e) => {
+  // Prevent unnecessary API call
+  if (transAmount.value == "") {
+    return;
+  }
+
   // Disable amount field
   toggleDisabled(transAmount, true);
 

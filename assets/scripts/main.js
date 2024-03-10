@@ -1,6 +1,7 @@
+const BASE_URL = "https://rich-erin-angler-hem.cyclic.app";
 const API_URLS = {
-  fetch: "https://crowded-cyan-wildebeest.cyclic.app/students/available",
-  convert: "https://crowded-cyan-wildebeest.cyclic.app/students/convert",
+  fetch: BASE_URL + "/students/available",
+  convert: BASE_URL + "/students/convert",
 };
 
 const totalBalance = document.querySelectorAll(".total-balance");
