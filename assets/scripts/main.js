@@ -1,4 +1,4 @@
-const BASE_URL = "https://rich-erin-angler-hem.cyclic.app";
+const BASE_URL = "https://dull-pink-sockeye-tie.cyclic.app";
 const API_URLS = {
   fetch: BASE_URL + "/students/available",
   convert: BASE_URL + "/students/convert",
